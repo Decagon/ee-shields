@@ -45,7 +45,7 @@ namespace Lobbydb
                     {
                         if (room.RoomType.StartsWith("Lobby"))
                         {
-                            if (room.Id.StartsWith("simple") || room.Id.StartsWith("fb") || room.Id.StartsWith("kong"))
+                            if (room.Id.StartsWith("simple") || room.Id.StartsWith("fb") || room.Id.StartsWith("kong") || room.Id.StartsWith("mouse") || room.Id.StartsWith("armor"))
                             {
                                 Console.WriteLine(room.Id);
                             }
