@@ -8,12 +8,8 @@ namespace eeshields
     internal static class Program
     {
         private const string GameId = "everybody-edits-su9rn58o40itdbnw69plyw";
-
         private static Client _globalClient;
 
-        public static List<RoomInfo> roomsDone = new List<RoomInfo>();
-
-        private static CancellationTokenSource cancelToken = new CancellationTokenSource();
         private static void Main()
         {
             ManualResetEvent waitHandle = new ManualResetEvent(false);
@@ -21,7 +17,7 @@ namespace eeshields
             PlayerIO.QuickConnect.SimpleConnect(GameId, "guest", "guest", null, delegate (Client client)
             {
                 _globalClient = client;
-                var rooms = DownloadLobby();
+                DownloadLobby();
                 waitHandle.Set();
             });
 
@@ -34,10 +30,9 @@ namespace eeshields
             Console.WriteLine("ERROR: [{0}] {1}", error.Source, error.Message);
         }
 
-        private static List<RoomInfo> DownloadLobby()
+        private static void DownloadLobby()
         {
             ManualResetEvent waitHandle = new ManualResetEvent(false);
-            List<RoomInfo> dataToWrite = new List<RoomInfo>();
             _globalClient.Multiplayer.ListRooms(null, null, 0, 0,
                 delegate (PlayerIOClient.RoomInfo[] rooms)
                 {
@@ -55,7 +50,6 @@ namespace eeshields
                 },
                 PrintPlayerIOError);
             waitHandle.WaitOne();
-            return dataToWrite;
         }
     }
 }
