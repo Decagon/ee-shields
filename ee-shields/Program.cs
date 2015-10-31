@@ -16,7 +16,6 @@ namespace Lobbydb
         private static Client _globalClient;
 
         public static List<RoomInfo> roomsDone = new List<RoomInfo>();
-        private static readonly int DOWNLOAD_INTERVAL_SECONDS = 5*1000;
 
         private static CancellationTokenSource cancelToken = new CancellationTokenSource();
         private static void Main()
@@ -25,16 +24,14 @@ namespace Lobbydb
             PlayerIO.QuickConnect.SimpleConnect(GameId, "guest", "guest", null, delegate (Client client)
             {
                 _globalClient = client;
-                    Task t = null;
                     if (_globalClient.ConnectUserId != null)
                     {
                         var rooms = DownloadLobby();
-                        //Console.WriteLine(JsonConvert.SerializeObject(rooms));
-                    Environment.Exit(0);
+                        Environment.Exit(0);
                     }
-                    
-                
             });
+
+            // will wait until Environment.Exit
             Thread.Sleep(Timeout.Infinite);
         }
 
