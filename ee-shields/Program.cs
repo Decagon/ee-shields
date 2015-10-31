@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Threading;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using NodaTime;
 using PlayerIOClient;
 
 namespace Lobbydb
@@ -24,11 +20,8 @@ namespace Lobbydb
             PlayerIO.QuickConnect.SimpleConnect(GameId, "guest", "guest", null, delegate (Client client)
             {
                 _globalClient = client;
-                    if (_globalClient.ConnectUserId != null)
-                    {
-                        var rooms = DownloadLobby();
-                        Environment.Exit(0);
-                    }
+                var rooms = DownloadLobby();
+                Environment.Exit(0);
             });
 
             // will wait until Environment.Exit
