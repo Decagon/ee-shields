@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using PlayerIOClient;
 
-namespace Lobbydb
+namespace eeshields
 {
     internal static class Program
     {

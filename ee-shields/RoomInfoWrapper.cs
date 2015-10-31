@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Lobbydb
+namespace eeshields
 {
     public class RoomInfoWrapper
     {

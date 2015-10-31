@@ -1,4 +1,4 @@
-namespace Lobbydb
+namespace eeshields
 {
     public class RoomInfo
     {
