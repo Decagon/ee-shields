@@ -16,16 +16,16 @@ namespace eeshields
         private static CancellationTokenSource cancelToken = new CancellationTokenSource();
         private static void Main()
         {
+            ManualResetEvent waitHandle = new ManualResetEvent(false);
 
             PlayerIO.QuickConnect.SimpleConnect(GameId, "guest", "guest", null, delegate (Client client)
             {
                 _globalClient = client;
                 var rooms = DownloadLobby();
-                Environment.Exit(0);
+                waitHandle.Set();
             });
 
-            // will wait until Environment.Exit
-            Thread.Sleep(Timeout.Infinite);
+            waitHandle.WaitOne();
         }
 
         // ReSharper disable once InconsistentNaming
