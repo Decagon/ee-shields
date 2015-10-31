@@ -1,1 +1,2 @@
-# ee-shields
+# Lobbydb
+An Everybody Edits lobby downloader
