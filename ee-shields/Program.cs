@@ -31,7 +31,7 @@ namespace Lobbydb
         // ReSharper disable once InconsistentNaming
         private static void PrintPlayerIOError(PlayerIOError error)
         {
-            Console.WriteLine("ERROR: [{0}] {1}", "unknownTime", error.Message);
+            Console.WriteLine("ERROR: [{0}] {1}", error.Source, error.Message);
         }
 
         private static List<RoomInfo> DownloadLobby()
