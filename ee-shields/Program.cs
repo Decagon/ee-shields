@@ -8,7 +8,6 @@ namespace eeshields
     internal static class Program
     {
         private const string GameId = "everybody-edits-su9rn58o40itdbnw69plyw";
-        private static Client _globalClient;
 
         private static void Main()
         {
@@ -16,9 +15,7 @@ namespace eeshields
 
             PlayerIO.QuickConnect.SimpleConnect(GameId, "guest", "guest", null, delegate (Client client)
             {
-                _globalClient = client;
-                DownloadLobby();
-                waitHandle.Set();
+                DownloadLobby(waitHandle, client);
             });
 
             waitHandle.WaitOne();
@@ -30,10 +27,9 @@ namespace eeshields
             Console.WriteLine("ERROR: [{0}] {1}", error.Source, error.Message);
         }
 
-        private static void DownloadLobby()
+        private static void DownloadLobby(ManualResetEvent waitHandle, Client client)
         {
-            ManualResetEvent waitHandle = new ManualResetEvent(false);
-            _globalClient.Multiplayer.ListRooms(null, null, 0, 0,
+            client.Multiplayer.ListRooms(null, null, 0, 0,
                 delegate (PlayerIOClient.RoomInfo[] rooms)
                 {
                     foreach (var room in rooms)
